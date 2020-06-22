@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.web.model.UserVO;
 
@@ -101,8 +102,38 @@ public class ResponseController {
 		}
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////////////
 	
+	//Redirect 처리
 	
+	//로그인 화면 요청 처리
+	@GetMapping("/login")
+	public String login() {
+		System.out.println("/login: GET 요청 발생!");
+		return "response/res-redirect-form";
+	}
+	
+	@PostMapping("/login")
+	public String login(@RequestParam("userId") String id, 
+						@RequestParam("userPw") String pw, 
+						@RequestParam("userPwChk") String pwChk, 
+						RedirectAttributes ra) {
+		System.out.println("/login: POST 요청 발생!");
+		System.out.println("ID: " + id);
+		System.out.println("PW: " + pw);
+		System.out.println("CHK: " + pwChk);
+		
+		if(id.equals("")) {
+			//model.addAttribute("msg", "아이디는 필수값입니다.");
+			ra.addFlashAttribute("msg", "아이디는 필수값입니다.");
+			return "redirect:/response/login";
+		} else if(!pw.equals(pwChk)) {
+			ra.addFlashAttribute("msg", "비밀번호 확인란을 체크하십시오.");
+			return "redirect:/response/login";
+		} else {
+			return "";
+		}
+	}
 	
 	
 	
