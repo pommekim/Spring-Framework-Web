@@ -26,12 +26,12 @@ public class ScoreDAO implements IScoreDAO {
 
 	@Override
 	public void deleteScore(int stuNum) {
-
+		scoreList.remove(stuNum);
 	}
 
 	@Override
 	public ScoreVO selectOne(int stuNum) {
-		return null;
+		return scoreList.get(stuNum);
 	}
 
 }

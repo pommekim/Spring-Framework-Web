@@ -20,6 +20,16 @@
 	</p>
 	</c:forEach>
 	
+	<a href="/web/score/register">다른 점수 등록하기</a>
+	
+	<script type="text/javascript">
+		const msg = "${message}";
+		console.log(msg);
+		if(msg === "delSuccess") {
+			alert("점수 삭제 완료!");
+		}
+	</script>
+	
 	
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.web.model.ScoreVO;
 import com.spring.web.service.IScoreService;
@@ -48,12 +49,36 @@ public class ScoreController {
 	//점수 삭제 요청 처리 메서드
 	//파라미터 변수명과 파라미터값을 받을 변수명이 같다면 requestparam을 생략해줘도 됨!!!
 	@GetMapping("/delete")
-	public String delete(int stuNum) {
+	public String delete(int stuNum, RedirectAttributes ra) {
 		System.out.println("삭제할 학번: " + stuNum);
 		
-		return "";
+		//삭제처리 완료하신 후 list요청이 들어갈 수 있도록 처리해 보세요.
+		service.deleteScore(stuNum);
+		ra.addFlashAttribute("message", "delSuccess");
+		return "redirect:/score/list";
 	}
 	
+	//점수 개별 조회 화면 열람요청 메서드
+	@GetMapping("/search")
+	public void search() {
+		System.out.println("/score/search: GET");
+	}
+
+	//점수 개별 조회 처리 요청 메서드
+	@GetMapping("/selectOne")
+	public String selectOne(int stuNum, Model model, RedirectAttributes ra) {
+		System.out.println("/score/selectOne: GET");
+		
+		List<ScoreVO> list = service.selectAllScores();
+		
+		if(stuNum > list.size()) {
+			ra.addFlashAttribute("msg", "학번 정보가 없습니다.");
+			return "redirect:/score/search";
+		} else {
+			model.addAttribute("stu", service.selectOne(stuNum));
+			return "score/search-result";
+		}
+	}
 	
 	
 	
