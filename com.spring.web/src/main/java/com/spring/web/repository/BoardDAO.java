@@ -27,8 +27,8 @@ public class BoardDAO implements IBoardDAO {
 
 	@Override
 	public void deleteArticle(int index) {
-		// TODO Auto-generated method stub
-
+		articles.remove(index);
+		System.out.println((index+1) + "번 게시물 삭제 완료!");
 	}
 
 	@Override
@@ -38,8 +38,8 @@ public class BoardDAO implements IBoardDAO {
 
 	@Override
 	public void modifyArticle(BoardVO article, int index) {
-		// TODO Auto-generated method stub
-
+		articles.set(index, article);
+		System.out.println((index+1) + "번 게시물 수정 완료!");
 	}
 
 }

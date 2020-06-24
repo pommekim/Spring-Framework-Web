@@ -26,8 +26,7 @@ public class BoardService implements IBoardService {
 
 	@Override
 	public void deleteArticle(int index) {
-		// TODO Auto-generated method stub
-
+		dao.deleteArticle(index-1);
 	}
 
 	@Override
@@ -37,8 +36,7 @@ public class BoardService implements IBoardService {
 
 	@Override
 	public void modifyArticle(BoardVO article, int index) {
-		// TODO Auto-generated method stub
-
+		dao.modifyArticle(article, index-1);
 	}
 
 }

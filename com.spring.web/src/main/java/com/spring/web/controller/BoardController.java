@@ -52,6 +52,33 @@ public class BoardController {
 		model.addAttribute("article", service.getContent(boardNo));
 	}
 	
+	//글 수정 화면 요청
+	@GetMapping("/modify")
+	public void modify(@ModelAttribute("boardNo") int boardNo, Model model) {
+		System.out.println("/board/modify?boardNo=" + boardNo + ": GET");
+		model.addAttribute("article", service.getContent(boardNo));
+	}
+	
+	//글 수정 처리 요청
+	@PostMapping("/modify")
+	public String modify(BoardVO article, int boardNo) {
+		//적절한 url 매핑 진행.
+		//수정을 진행해주시고, 수정이 완료되면 수정된 상세 글 보기 페이지로 이동할 수 있도록 처리해주세요.
+		System.out.println("/board/modify?boardNo=" + boardNo + ": POST");
+		
+		service.modifyArticle(article, boardNo);
+		return "redirect:/board/content?boardNo="+boardNo;
+	}
+	
+	//글 삭제 요청
+	@GetMapping("/delete")
+	public String delete(int boardNo) {
+		System.out.println("/board/delete?boardNo=" + boardNo + ": GET");
+		service.deleteArticle(boardNo);
+		return "redirect:/board/list";
+	}
+	
+	
 	
 	
 	

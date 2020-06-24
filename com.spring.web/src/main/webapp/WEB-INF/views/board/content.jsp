@@ -14,7 +14,7 @@
 		# 글번호: ${boardNo} <br>
 		# 작성자: ${article.writer} <br>
 		# 제목: ${article.title} <br>
-		# 내용: <textarea row="3" readonly>${article.content}</textarea> <br>
+		# 내용: <textarea rows="3" readonly>${article.content}</textarea> <br>
 	</p>
 	
 	<a href="/web/board/list">글 목록보기</a> &nbsp;
